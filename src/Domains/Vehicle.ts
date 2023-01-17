@@ -1,4 +1,4 @@
-class Automobile {
+class Vehicle {
   readonly id: string | undefined;
   protected model: string;
   protected year: number;
@@ -67,4 +67,4 @@ class Automobile {
   }
 }
 
-export default Automobile;
+export default Vehicle;
