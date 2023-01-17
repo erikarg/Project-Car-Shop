@@ -1,10 +1,6 @@
-interface ICar {
-  id?: string | undefined,
-  model: string,
-  year: number,
-  color: string,
-  status?: boolean | undefined,
-  buyValue: number,
+import IAutomobile from './IAutomobile';
+
+interface ICar extends IAutomobile {
   doorsQty: number,
   seatsQty: number,
 }

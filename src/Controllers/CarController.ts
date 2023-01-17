@@ -17,7 +17,6 @@ class CarController {
 
   public async create() {
     const car: ICar = {
-      id: this.req.body.id,
       model: this.req.body.model,
       year: this.req.body.year,
       color: this.req.body.color,
