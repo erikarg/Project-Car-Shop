@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { isValidObjectId } from 'mongoose';
 import IMotorcycle from '../Interfaces/IMotorcycle';
 import MotorcycleService from '../Services/MotorcycleService';
 
@@ -32,6 +33,21 @@ class MotorcycleController {
     } catch (error) {
       this.next(error);
     }
+  }
+
+  public async findAll() {
+    const listOfMotorcycles = await this.service.getAll();
+    return this.res.status(200).json(listOfMotorcycles);
+  }
+
+  public async findById() {
+    const { id } = this.req.params;
+    if (!isValidObjectId(id)) return this.res.status(422).json({ message: 'Invalid mongo id' });
+
+    const selectedMotorcycle = await this.service.getById(id);
+    if (!selectedMotorcycle) return this.res.status(404).json({ message: 'Motorcycle not found' });
+
+    return this.res.status(200).json(selectedMotorcycle);
   }
 }
 
