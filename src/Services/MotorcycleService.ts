@@ -23,6 +23,11 @@ class MotorcycleService {
       .filter((motorcycle) => id === motorcycle.id); 
     return foundMotorcycle;
   }
+
+  public async updateMotorcycle(id: string, body: IMotorcycle) {
+    const updatedInfo = await this.model.update(id, body);
+    if (updatedInfo !== null) return new Motorcycle(updatedInfo);
+  }
 }
 
 export default MotorcycleService;
