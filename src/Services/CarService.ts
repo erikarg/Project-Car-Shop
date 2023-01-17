@@ -3,24 +3,28 @@ import ICar from '../Interfaces/ICar';
 import CarModel from '../Models/CarModel';
 
 class CarService {
+  private model = new CarModel();
+
   public async registration(car: ICar) {
-    const model = new CarModel();
-    const newCar = await model.create(car);
+    const newCar = await this.model.create(car);
     return new Car(newCar);
   }
 
   public async getAll() {
-    const model = new CarModel();
-    const search = await model.find();
+    const search = await this.model.find();
     const allCars = search.map((car) => new Car(car));
     return allCars;
   }
 
   public async getById(id: string) {
-    const model = new CarModel();
-    const search = await model.findById(id);
+    const search = await this.model.findById(id);
     const [foundCar] = search.map((car) => new Car(car)).filter((car) => id === car.id); 
     return foundCar;
+  }
+
+  public async updateCar(id: string, body: ICar) {
+    const updatedInfo = await this.model.update(id, body);
+    if (updatedInfo !== null) return new Car(updatedInfo);
   }
 }
 
