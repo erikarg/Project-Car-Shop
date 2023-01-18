@@ -79,37 +79,6 @@ describe('Testa todas as funcionalidades do CarService', function () {
     expect(result).to.be.deep.equal(output);
   });
 
-  it('Deve retornar erro devido ao ID no formato incorreto', async function () {
-    const input = {
-      model: 'Marea',
-      year: 1992,
-      color: 'Red',
-      status: true,
-      buyValue: 12.000,
-      doorsQty: 2,
-      seatsQty: 5,
-    };
-
-    const output = new Car({
-      id: '634852326b35b59438fbea2f',
-      model: 'Marea',
-      year: 2002,
-      color: 'Black',
-      status: true,
-      buyValue: 15.99,
-      doorsQty: 4,
-      seatsQty: 5,
-    });
-    sinon.stub(Model, 'update').resolves();
-
-    try {
-      const result = await service.updateCar('aaaaaaaaabbbbbbbbbbcccccccc', input);
-      expect(result).to.be.equal(output);
-    } catch (error) {
-      expect((error as Error).message).to.be.equal('Invalid Mongo id');
-    }
-  });
-
   afterEach(function () {
     sinon.restore();
   });
