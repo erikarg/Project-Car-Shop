@@ -64,7 +64,7 @@ describe('Testa todas as funcionalidades do CarService', function () {
 
   it('Deve recuperar o carro através do id fornecido', async function () {
     const output = {
-      id: '63c70797512bd8e8bcc95222',
+      id: '634852326b35b59438fbea2f',
       model: 'Marea',
       year: 2002,
       color: 'Black',
@@ -75,8 +75,39 @@ describe('Testa todas as funcionalidades do CarService', function () {
     };
     sinon.stub(Model, 'find').resolves([output]);
 
-    const result = await service.getById(output.id);
+    const result = await service.getById('634852326b35b59438fbea2f');
     expect(result).to.be.deep.equal(output);
+  });
+
+  it('Deve retornar erro devido ao ID no formato incorreto', async function () {
+    const input = {
+      model: 'Marea',
+      year: 1992,
+      color: 'Red',
+      status: true,
+      buyValue: 12.000,
+      doorsQty: 2,
+      seatsQty: 5,
+    };
+
+    const output = new Car({
+      id: '634852326b35b59438fbea2f',
+      model: 'Marea',
+      year: 2002,
+      color: 'Black',
+      status: true,
+      buyValue: 15.99,
+      doorsQty: 4,
+      seatsQty: 5,
+    });
+    sinon.stub(Model, 'update').resolves();
+
+    try {
+      const result = await service.updateCar('aaaaaaaaabbbbbbbbbbcccccccc', input);
+      expect(result).to.be.equal(output);
+    } catch (error) {
+      expect((error as Error).message).to.be.equal('Invalid Mongo id');
+    }
   });
 
   afterEach(function () {

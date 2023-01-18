@@ -59,6 +59,17 @@ class CarController {
 
     return this.res.status(200).json(selectedCar);
   }
+
+  public async delete() {
+    const { id } = this.req.params;
+    if (!isValidObjectId(id)) return this.res.status(422).json({ message: 'Invalid mongo id' });
+    
+    const selectedCar = await this.service.getById(id);
+    if (!selectedCar) return this.res.status(404).json({ message: 'Car not found' });
+
+    await this.service.deleteById(id);
+    return this.res.status(204).json();
+  }
 }
 
 export default CarController;

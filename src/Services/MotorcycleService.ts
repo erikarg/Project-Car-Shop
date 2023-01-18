@@ -28,6 +28,10 @@ class MotorcycleService {
     const updatedInfo = await this.model.update(id, body);
     if (updatedInfo !== null) return new Motorcycle(updatedInfo);
   }
+
+  public async deleteById(id: string) {
+    await this.model.delete(id);
+  }
 }
 
 export default MotorcycleService;

@@ -1,7 +1,7 @@
 import IMotorcycle from '../Interfaces/IMotorcycle';
-import Automobile from './Vehicle';
+import Vehicle from './Vehicle';
 
-class Motorcycle extends Automobile {
+class Motorcycle extends Vehicle {
   private category: string;
   private engineCapacity: number;
 

@@ -4,44 +4,59 @@ import MotorcycleController from '../Controllers/MotorcycleController';
 
 const route = Router();
 
+const cars = '/cars';
+const carsId = '/cars/:id';
+const motorcycles = '/motorcycles';
+const motorcyclesId = '/motorcycles/:id';
+
 route.post(
-  '/cars',
+  cars,
   (req, res, next) => new CarController(req, res, next).create(),
 );
 
 route.get(
-  '/cars',
+  cars,
   (req, res, next) => new CarController(req, res, next).findAll(),
 );
 
 route.get(
-  '/cars/:id',
+  carsId,
   (req, res, next) => new CarController(req, res, next).findById(),
 );
 
 route.put(
-  '/cars/:id',
+  carsId,
   (req, res, next) => new CarController(req, res, next).update(),
 );
 
+route.delete(
+  carsId,
+  (req, res, next) => new CarController(req, res, next).delete(),
+);
+
 route.post(
-  '/motorcycles',
+  motorcycles,
   (req, res, next) => new MotorcycleController(req, res, next).create(),
 );
 
 route.get(
-  '/motorcycles',
+  motorcycles,
   (req, res, next) => new MotorcycleController(req, res, next).findAll(),
 );
 
 route.get(
-  '/motorcycles/:id',
+  motorcyclesId,
   (req, res, next) => new MotorcycleController(req, res, next).findById(),
 );
 
 route.put(
-  '/motorcycles/:id',
+  motorcyclesId,
   (req, res, next) => new MotorcycleController(req, res, next).update(),
+);
+
+route.delete(
+  motorcyclesId,
+  (req, res, next) => new MotorcycleController(req, res, next).delete(),
 );
 
 export default route;

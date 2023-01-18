@@ -82,6 +82,26 @@ describe('Testa todas as funcionalidades do MotorcycleService', function () {
     const result = await service.getById(output.id);
     expect(result).to.be.deep.equal(output);
   });
+  
+  it('Deve retornar erro devido ao ID no formato incorreto', async function () {
+    const input = {
+      model: motoModel,
+      year: 2014,
+      color: 'Red',
+      status: true,
+      buyValue: 45.000,
+      category: 'Street',
+      engineCapacity: 600,
+    };
+
+    sinon.stub(Model, 'update').resolves();
+
+    try {
+      await service.updateMotorcycle('aaaaaaaaabbbbbbbbbbcccccccc', input);
+    } catch (error) {
+      expect((error as Error).message).to.be.equal('Invalid Mongo id');
+    }
+  });
 
   afterEach(function () {
     sinon.restore();
