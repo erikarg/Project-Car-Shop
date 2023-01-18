@@ -3,6 +3,9 @@ import { isValidObjectId } from 'mongoose';
 import IMotorcycle from '../Interfaces/IMotorcycle';
 import MotorcycleService from '../Services/MotorcycleService';
 
+const mongoMessage = 'Invalid mongo id';
+const motorcycleMessage = 'Motorcycle not found';
+
 class MotorcycleController {
   private req: Request;
   private res: Response;
@@ -42,30 +45,30 @@ class MotorcycleController {
 
   public async findById() {
     const { id } = this.req.params;
-    if (!isValidObjectId(id)) return this.res.status(422).json({ message: 'Invalid mongo id' });
+    if (!isValidObjectId(id)) return this.res.status(422).json({ message: mongoMessage });
 
     const selectedMotorcycle = await this.service.getById(id);
-    if (!selectedMotorcycle) return this.res.status(404).json({ message: 'Motorcycle not found' });
+    if (!selectedMotorcycle) return this.res.status(404).json({ message: motorcycleMessage });
 
     return this.res.status(200).json(selectedMotorcycle);
   }
 
   public async update() {
     const { id } = this.req.params;
-    if (!isValidObjectId(id)) return this.res.status(422).json({ message: 'Invalid mongo id' });
+    if (!isValidObjectId(id)) return this.res.status(422).json({ message: mongoMessage });
 
     const selectedMotorcycle = await this.service.updateMotorcycle(id, this.req.body);
-    if (!selectedMotorcycle) return this.res.status(404).json({ message: 'Motorcycle not found' });
+    if (!selectedMotorcycle) return this.res.status(404).json({ message: motorcycleMessage });
 
     return this.res.status(200).json(selectedMotorcycle);
   }
 
-    public async delete() {
+  public async delete() {
     const { id } = this.req.params;
-    if (!isValidObjectId(id)) return this.res.status(422).json({ message: 'Invalid mongo id' });
+    if (!isValidObjectId(id)) return this.res.status(422).json({ message: mongoMessage });
 
     const selectedMotorcycle = await this.service.getById(id);
-    if (!selectedMotorcycle) return this.res.status(404).json({ message: 'Motorcycle not found' });
+    if (!selectedMotorcycle) return this.res.status(404).json({ message: motorcycleMessage });
 
     await this.service.deleteById(id);
     return this.res.status(204).json();
