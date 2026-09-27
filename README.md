@@ -11,6 +11,8 @@ Projeto desenvolvido durante o terceiro módulo (desenvolvimento back-end) do cu
 
 Desenvolver uma API feita em TypeScript e MongoDB (utilizando Mongoose) para gerenciar o banco de dados de uma concessionária de veículos. Trata-se de um CRUD utilizando arquitetura do tipo REST, em camadas MSC, e o código foi escrito sob o conceito de POO e princípios SOLID. Também conta com testes de cobertura.
 
+A camada de Model usa uma classe genérica `AbstractODM<T>` (`src/Models/AbstractODM.ts`) que centraliza o registro do model no Mongoose e as operações comuns (`create` e `update`). `CarModel` e `MotorcycleModel` herdam dela, fornecendo apenas o schema e o nome da coleção, e adicionam as consultas específicas; a herança evita duplicar esse código entre os dois tipos de veículo, que compartilham o mesmo contrato de persistência.
+
 ## Stacks utilizadas
 
 * **Back-end:** MongoDB, Mongoose
@@ -21,7 +23,7 @@ Desenvolver uma API feita em TypeScript e MongoDB (utilizando Mongoose) para ger
 
 Realize o clone do projeto através do comando:
 
-`git clone git@github.com:erikarg/Project_Car_Shop.git`
+`git clone git@github.com:erikarg/Project-Car-Shop.git`
 
 Acesse a pasta e suba os containers através do comando:
 
@@ -29,7 +31,7 @@ Acesse a pasta e suba os containers através do comando:
 
 Agora é só iniciar a aplicação:
 
-`npm run dev
+`npm run dev`
 
 ## Rotas
 
@@ -66,6 +68,8 @@ Project developed during the third module (back-end development) of the Trybe co
 
 Develop an API made in TypeScript and MongoDB (using Mongoose) to manage the database of a car dealership. It is a CRUD using REST architecture, in MSC layers, and the code was written under the concept of OOP and SOLID principles. It also has coverage tests.
 
+The Model layer uses a generic `AbstractODM<T>` class (`src/Models/AbstractODM.ts`) that centralizes Mongoose model registration and the shared operations (`create` and `update`). `CarModel` and `MotorcycleModel` extend it, supplying only their schema and collection name plus their own queries; inheritance avoids duplicating that code across the two vehicle types, which share the same persistence contract.
+
 ## Stacks
 
 * **Back-end:** MongoDB, Mongoose
@@ -76,7 +80,7 @@ Develop an API made in TypeScript and MongoDB (using Mongoose) to manage the dat
 
 Clone the project using the command:
 
-`git clone git@github.com:erikarg/Project_Car_Shop.git`
+`git clone git@github.com:erikarg/Project-Car-Shop.git`
 
 Access the folder and upload the containers using the command:
 
